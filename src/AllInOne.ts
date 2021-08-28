@@ -9,6 +9,14 @@ import {
 } from "@typeit/discord";
 import { NotBot } from './NotABot';
 
+let speakers = [];
+const apple = {
+  maku: "hyvä",
+  hinta: {
+    arvo: 9.95
+  },
+};
+
 @Discord("!")
 @Description("Example of having everything in one file!")
 export abstract class AllInOne {
@@ -16,8 +24,32 @@ export abstract class AllInOne {
   @Command("ping")
   @Guard(NotBot)
   ping(command: CommandMessage): void {
-    command.reply("pong!");
+    let allreadyinspeakers = false;
+
+    // loopthrowspeakers
+    for (let index = 0; index < speakers.length; index += 1) {
+      const author = speakers[index];
+      if (author === command.author.username) {
+        allreadyinspeakers = true;
+      }
+    }
+
+    // save author of message
+    if (!allreadyinspeakers) {
+      speakers.push(command.author.username);
+    }
+
+    // construct message
+    let message = "";
+    for (let index = 0; index < speakers.length; index += 1) {
+      const author = speakers[index]; 
+      message = message + author + ", ";
+    }
+
+    // send costructed message
+    command.reply(message);
   }
+
 
   @Command("hellothere")
   hello(command: CommandMessage): void {
