@@ -6,7 +6,7 @@ import {
     On,
     ArgsOf,
     Guard,
-  } from "@typeit/discord";
+} from "@typeit/discord";
 import { Message } from "discord.js";
 
 interface RankingUser {
@@ -43,7 +43,6 @@ export abstract class MessageCounter {
         rankings[objIndex].ranking += 1;
     }
 
-
     @Command("ränkings")
     rankings(command: CommandMessage): void {
         const person = rankings.find( ({ name }) => name === command.author.username );
@@ -51,4 +50,5 @@ export abstract class MessageCounter {
             command.reply(person.name +  " on " + person.ranking + "pistettä");
         }
     }
+
 }
