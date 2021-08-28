@@ -21,7 +21,15 @@ export abstract class AllInOne {
 
   @Command("hellothere")
   hello(command: CommandMessage): void {
+    const taulukko = [1,2,3];
+    let message = "terekukkuu";
+    message = message + "!";
     command.author.send("General Kenobi!");
+    for (let index = 0; index < taulukko.length; index += 1) {
+      message += taulukko[index];
+      command.reply(message);
+    }
+    
   }
 
   @On("ready")
